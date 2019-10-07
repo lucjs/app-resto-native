@@ -2,6 +2,7 @@ import React from 'react';
 
 import t from 'tcomb-form-native';
 import validations from '../utils/Validation';
+import inputTemplate from '../templates/input';
 
 export const RegisterStruct = t.struct({
     name: t.String,
@@ -12,29 +13,41 @@ export const RegisterStruct = t.struct({
 
 export const RegisterOptions = {
     fields: {
-        name: {
-            label: "Nombre",
-            placeholder: "Escribe tu nombre y apellido",
-            error: "Nombre inválido"
+        name: {         
+            template: inputTemplate,
+            config: {
+                placeholder: "Escribe tu nombre y apellido",            
+                iconType: "material-comunity",
+                iconName: "account-box"
+              }
         },
-        email: {
-            label: "Email",
-            placeholder: "Escribe tu email",
-            error: "Email inválido"
+        email: {           
+            template: inputTemplate,
+            config: {
+                placeholder: "Escribe tu email",              
+                iconType: "material-comunity",
+                iconName: "email"
+              }
         },
-        password: {
-            label: "Contraseña",
-            placeholder: "Escribe tu contraseña",
-            error: "Contraseña inválida",
-            password: true,
-            secureTextEntry: true
+        password: {         
+            template: inputTemplate,
+            config: {
+                placeholder: "Escribe tu contraseña",              
+                iconType: "material-comunity",
+                iconName: "lock-outline",
+                password: true,
+                secureTextEntry: true
+              }
         },
-        passwordConfirmation: {
-            label: "Confirmar contraseña",
-            placeholder: "Repite tu contraseña",
-            error: "Contraseña inválida",
-            password: true,
-            secureTextEntry: true
+        passwordConfirmation: {           
+            template: inputTemplate,
+            config: {
+                placeholder: "Repite tu contraseña",              
+                iconType: "material-comunity",
+                iconName: "lock-open",
+                password: true,
+                secureTextEntry: true
+              }
         }
     }
 }
