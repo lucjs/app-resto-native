@@ -54,7 +54,7 @@ const RootStack = createBottomTabNavigator({
         navigationOptions: ({navigation}) => ({
             tabBarLabel: "Home",
             tabBarIcon: ({tintColor}) => <Icon 
-            name="compass-outline"
+            name="home-outline"
             type="material-community"
             size={22} 
             color={tintColor}
@@ -88,7 +88,7 @@ const RootStack = createBottomTabNavigator({
         navigationOptions: ({navigation}) => ({
             tabBarLabel: "Account",
             tabBarIcon: ({tintColor}) => <Icon 
-            name='home-outline' 
+            name='account-check-outline' 
             type="material-community"
             size={22} color={tintColor} 
              />
@@ -97,6 +97,8 @@ const RootStack = createBottomTabNavigator({
 },
 
 {
+    initialRouteName: "MyAccount",
+    order: ['Home', 'TopFive','Search', 'MyAccount'],
     tabBarOptions: {
         inactiveTintColor: "#646464",
         activeTintColor: "#00a680"
