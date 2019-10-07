@@ -7,9 +7,11 @@ import { createAppContainer } from 'react-navigation';
 
 //Screens
 import HomeScreen from '../screens/Home';
-import MyAccountScreen from '../screens/MyAccount';
 import SearchScreen from '../screens/Search';
 import TopFiveScreen from '../screens/TopFive';
+//Screen Account
+import MyAccountScreen from '../screens/accounts/MyAccount';
+import RegisterScreen from '../screens/accounts/Register';
 
 
 const homeScreenStack = createStackNavigator ({
@@ -44,6 +46,12 @@ const myAccountScreenStack = createStackNavigator ({
         screen: MyAccountScreen,
         navigationOptions: ({navigation}) => ({
             title: "Mi Cuenta"
+        })
+    },
+    Register: {
+        screen: RegisterScreen,
+        navigationOptions: ({navigation}) => ({
+            title: "Registrarse"
         })
     }
 });
