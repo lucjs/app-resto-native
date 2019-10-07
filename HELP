@@ -1,0 +1,21 @@
+https://facebook.github.io/react-native/
+
+https://react-native-elements.github.io/react-native-elements/
+npm install react-native-elements
+
+https://www.npmjs.com/package/tcomb-form-native
+npm i tcomb-form-native
+
+--version 4x
+https://reactnavigation.org/
+expo install react-native-gesture-handler
+npm install -g expo-cli
+yarn add react-navigation
+yarn add react-navigation-stack
+yarn add react-navigation-tabs
+yarn add react-native-reanimated
+
+--dissmiss
+expo r -c
+
+
