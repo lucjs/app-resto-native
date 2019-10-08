@@ -28,10 +28,7 @@ export default class Register extends Component {
   
     register = () => {        
 
-        this.refs.toast.show('Registrado correctamente.', 200, () => {
-            this.props.navigation.navigate('MyAccount');
-        });
-              
+      
         const {password, passwordConfirmation} = this.state.formData;
         
         if (password === passwordConfirmation) {           
