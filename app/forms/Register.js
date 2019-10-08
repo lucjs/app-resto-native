@@ -44,7 +44,7 @@ export const RegisterOptions = {
             config: {
                 placeholder: "Repite tu contraseña",              
                 iconType: "material-comunity",
-                iconName: "lock-open",
+                iconName: "lock",
                 password: true,
                 secureTextEntry: true
               }

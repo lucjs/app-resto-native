@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { StyleSheet, View} from 'react-native';
+import Toast, {DURATION} from 'react-native-easy-toast';
 
 import t from 'tcomb-form-native';
 const Form = t.form.Form;
 import {RegisterStruct, RegisterOptions} from '../../forms/Register';
 import {Button, Text} from 'react-native-elements';
 
+import * as firebase from 'firebase';
 
 export default class Register extends Component {
 
@@ -25,7 +27,11 @@ export default class Register extends Component {
     }
   
     register = () => {        
-        
+
+        this.refs.toast.show('Registrado correctamente.', 200, () => {
+            this.props.navigation.navigate('MyAccount');
+        });
+              
         const {password, passwordConfirmation} = this.state.formData;
         
         if (password === passwordConfirmation) {           
@@ -33,8 +39,16 @@ export default class Register extends Component {
             const validate = this.refs.registerForm.getValue();
             //clear
             this.setState({formErrorMessage: ""}); 
-            console.log("Registro Correcto");
-
+            //console.log("Registro Correcto");
+            firebase.auth().createUserWithEmailAndPassword(validate.email, validate.password)
+                .then(resolve => {
+                    this.refs.toast.show('Registrado correctamente.', 200, () => {
+                        this.props.navigation.navigate('MyAccount');
+                        //this.props.navigation.goBack();
+                    });                         
+            }).catch(err => {
+                this.refs.toast.show('El email ya esta en uso.', 2500);
+            })
             if (validate) {                
                 this.setState({formErrorMessage: "Formulario correcto"});              
             }
@@ -73,6 +87,15 @@ export default class Register extends Component {
                     title = "Unirse" onPress={() => this.register()}
                 />
                 <Text style ={styles.formErrorStyle}>{formErrorMessage}</Text>
+                <Toast
+                    ref="toast"                   
+                    position='bottom'
+                    positionValue={250}
+                    fadeInDuration={1000}
+                    fadeOutDuration={1000}
+                    opacity={0.8}
+                    textStyle={{color:'#fff'}}
+                />
             </View>
         );
     }

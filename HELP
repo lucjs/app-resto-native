@@ -18,4 +18,9 @@ yarn add react-native-reanimated
 --dissmiss
 expo r -c
 
+yarn add firebase
+
+npm i react-native-easy-toast --save
+yarn add react-native-easy-toast
+
 

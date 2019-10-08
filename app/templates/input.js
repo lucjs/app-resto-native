@@ -29,6 +29,5 @@ const styles = StyleSheet.create({
     },
     iconContainer: {
         paddingRight: 15,
-    }
-    
+    }    
 });
