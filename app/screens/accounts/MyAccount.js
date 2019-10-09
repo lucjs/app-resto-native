@@ -6,12 +6,27 @@ import * as firebase from 'firebase';
 
 export default class MyAccount extends Component {
 
+    constructor(){
+        super();
+        this.state = {
+            login: false
+        }
+    }
       
     //priority II
-    componentDidMount() {
-        firebase.auth().onAuthStateChanged(userLogueado => {
-            userLogueado
-            //console.log(userLogueado);
+    async componentDidMount() {
+        await firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                this.setState({
+                    login: true
+                });
+            } 
+            else {
+                this.setState({
+                    login: false
+                });
+            }
+            //if logged _> console.log(userLogueado), return atributes api auth;
         });
     }
 
@@ -23,14 +38,32 @@ export default class MyAccount extends Component {
         this.props.navigation.navigate(nameScreen);
     }
 
-    render(){
-        return (
-            <View style={styles.viewBody}>
-                <Text>MyAccount Screen...</Text>
-                <Button title="Registrarse" onPress={() => this.goToScreen('Register')}/>
-                <Button title="Login" onPress={() => this.goToScreen('Login')}/>
-            </View>
-        );
+   logout = () => {
+        firebase.auth().signOut();
+   } 
+
+
+    render() {
+
+        const {login} = this.state;
+        
+        if (login) {
+              return (
+                <View style={styles.viewBody}>
+                    <Text>Estas loguedado correctamente...</Text>                   
+                    <Button title="Cerrar Sesion" onPress={() => this.logout()}/>
+                </View>
+            );      
+        } 
+        else {
+            return (
+                <View style={styles.viewBody}>
+                    <Text>MyAccount Screen...</Text>
+                    <Button title="Registrarse" onPress={() => this.goToScreen('Register')}/>
+                    <Button title="Login" onPress={() => this.goToScreen('Login')}/>
+                </View>
+            );
+        }        
     }
 }
 

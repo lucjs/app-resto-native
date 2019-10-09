@@ -32,7 +32,7 @@ login = () => {
       this.setState({formErrorMessage: ""}); 
       //console.log("Registro Correcto");      
       if (!validate) {
-        this.refs.toast.show('Inicio incorrecto, revise sus datos.', 2500) 
+        this.refs.toast.show('Inicio incorrecto, revise sus datos.', 200) 
       } else {
         this.setState({ formErrorMessage: "" });
         firebase
