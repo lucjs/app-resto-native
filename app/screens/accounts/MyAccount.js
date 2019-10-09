@@ -15,8 +15,8 @@ export default class MyAccount extends Component {
       
     //priority II
     async componentDidMount() {
-        await firebase.auth().onAuthStateChanged(user => {
-            if (user) {
+        await firebase.auth().onAuthStateChanged(v => {
+            if (v) {
                 this.setState({
                     login: true
                 });

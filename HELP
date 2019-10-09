@@ -23,4 +23,6 @@ yarn add firebase
 npm i react-native-easy-toast --save
 yarn add react-native-easy-toast
 
+expo install expo-facebook
+expo fetch:android:hashes
 

@@ -2347,6 +2347,11 @@ expo-constants@~7.0.0:
   dependencies:
     ua-parser-js "^0.7.19"
 
+expo-facebook@~7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/expo-facebook/-/expo-facebook-7.0.0.tgz#532b42d67ec91df051fa1f41ee8a1322154fba2b"
+  integrity sha512-R/ogRMxFqUCh08f575IR8aPy8q5463E5Sg/Ef7nasuqKKh1tEcVh4JoRXN3pEnZ9hivnRsXvJOchmPsy+L1upw==
+
 expo-file-system@~7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/expo-file-system/-/expo-file-system-7.0.0.tgz#ac98233b18774cce299fffd9451f08f21b116564"
@@ -4762,6 +4767,11 @@ react-native-elements@^1.2.5:
     prop-types "^15.7.2"
     react-native-ratings "^6.3.0"
     react-native-status-bar-height "^2.2.0"
+
+react-native-fbsdk@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-fbsdk/-/react-native-fbsdk-1.0.4.tgz#ecc0faf235e12de4423af9908f56b999cf144422"
+  integrity sha512-s0fBRDi/k6jfWFRnmwQwJA4WTriKhyes71tYO6LdXF6nAI7k+7DCdFZqIA7PqtTUA7WwEjSP6qjKTibCDWOwLw==
 
 react-native-gesture-handler@~1.3.0:
   version "1.3.0"
