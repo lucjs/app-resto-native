@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import { StyleSheet, View, ActivityIndicator} from 'react-native';
 import Toast, {DURATION} from 'react-native-easy-toast';
 import * as Facebook from 'expo-facebook';
-
 import t from 'tcomb-form-native';
 const Form = t.form.Form;
 import {LoginStruct, LoginOptions} from '../../forms/LoginForm';
 import {Image ,Button, Text, SocialIcon, Divider} from 'react-native-elements';
-
 import * as firebase from 'firebase';
 
 
@@ -61,38 +59,36 @@ login = () => {
       
   };
 
-    loginFacebook = async () => {      
+    /*loginFacebook = async () => {      
       const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync(
       FacebookApi.application_id,
       {permissions: FacebookApi.permissions}
     );
     console.log(type);
     console.log(token);
-};
+};*/
 
 loginFacebook = async () => { 
-  try {
-    const {
-      type,
-      token,
-      expires,
-      permissions,
-      declinedPermissions,
-    } = await Facebook.logInWithReadPermissionsAsync('484439992141986', {
-      permissions: ['public_profile'],
-    });
-    if (type === 'success') {
-      // Get the user's name using Facebook's Graph API
-      const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
-      Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
-    } else {
-      // type === 'cancel'
-    }
-  } catch ({ message }) {
-    alert(`Facebook Login Error: ${message}`);
-  }
-}
 
+  const { type, token } 
+  = await Facebook.logInWithReadPermissionsAsync('484439992141986', {permissions: ['public_profile']});
+  if (type === 'success') { 
+    const credentials = firebase.auth.FacebookAuthProvider.credential(token);
+    firebase.auth().signInWithCredential(credentials).
+    then(() => {
+      this.refs.toastLogin.show("Login correcto", 100, () => {
+        this.props.navigation.goBack();
+      }).catch(err => {
+        this.refs.toastLogin.show('Error en inicio de sesión, intente nuevamente...', 300);
+      });
+    })
+  } else if(type === "cancel") {
+    this.refs.toastLogin.show('Inicio de sesión cancelado...', 300);
+  } else {
+    this.refs.toastLogin.show('Error en inicio de sesión, intente nuevamente...', 300);
+  }
+
+}
 
 
 
@@ -137,7 +133,7 @@ onChange = (formData) => {
               />
 
               <Toast
-                ref="toast"
+                ref="toastLogin"
                 position="bottom"
                 positionValue={420}
                 fadeInDuration={1000}

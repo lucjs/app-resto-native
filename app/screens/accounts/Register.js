@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { StyleSheet, View} from 'react-native';
 import Toast, {DURATION} from 'react-native-easy-toast';
-
 import t from 'tcomb-form-native';
 const Form = t.form.Form;
 import {RegisterStruct, RegisterOptions} from '../../forms/Register';
 import {Button, Text} from 'react-native-elements';
-
 import * as firebase from 'firebase';
 
 export default class Register extends Component {
