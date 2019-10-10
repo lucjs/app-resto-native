@@ -37,12 +37,12 @@ export default class Register extends Component {
             //console.log("Registro Correcto");
             firebase.auth().createUserWithEmailAndPassword(validate.email, validate.password)
                 .then(resolve => {
-                    this.refs.toast.show('Registrado correctamente.', 200, () => {
+                    this.refs.toastRegister.show('Registrado correctamente.', 200, () => {
                         this.props.navigation.navigate('MyAccount');
                         //this.props.navigation.goBack();
                     });                         
             }).catch(err => {
-                this.refs.toast.show('El email ya esta en uso.', 2500);
+                this.refs.toastRegister.show('El email ya esta en uso.', 2500);
             })
             if (validate) {                
                 this.setState({formErrorMessage: "Formulario correcto"});              
@@ -83,7 +83,7 @@ export default class Register extends Component {
                 />
                 <Text style ={styles.formErrorStyle}>{formErrorMessage}</Text>
                 <Toast
-                    ref="toast"                   
+                    ref="toastRegister"                   
                     position='bottom'
                     positionValue={250}
                     fadeInDuration={1000}
