@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, ActivityIndicator} from 'react-native';
+import { StyleSheet, View, ActivityIndicator, Text } from 'react-native';
 import Toast, {DURATION} from 'react-native-easy-toast';
 import * as Facebook from 'expo-facebook';
 import t from 'tcomb-form-native';
 const Form = t.form.Form;
 import {LoginStruct, LoginOptions} from '../../forms/LoginForm';
-import {Image ,Button, Text, SocialIcon, Divider} from 'react-native-elements';
+import {Image ,Button, SocialIcon, Divider} from 'react-native-elements';
 import * as firebase from 'firebase';
 import { setLightEstimationEnabled } from 'expo/build/AR';
 
@@ -123,6 +123,7 @@ export default class Login extends Component {
                      <View style={styles.viewBody}>
                        <Image
                          source={require("../../../assets/img/5-tenedores-letras-icono-logo.png")}
+                         containerStyle ={styles.containerLogo}
                          style={styles.logo}
                          PlaceholderContent={<ActivityIndicator />}
                          resizeMode="contain"
@@ -174,10 +175,13 @@ export default class Login extends Component {
                }
 
 const styles = StyleSheet.create({
+ 
+  containerLogo: {
+      alignSelf: "center"
+  },
   logo: {
-    width: 150,
-    height: 75
-
+    width: 300,
+    height: 100
   },
   viewBody: {
     flex: 1,
@@ -185,14 +189,14 @@ const styles = StyleSheet.create({
     marginLeft: 30,
     marginRight: 30
   },
-  viewForm:{
+  viewForm: {
     marginTop: 50
   },
   buttonLoginStyle: {
     marginTop: 20,
     marginLeft: 10,
     marginRight: 10,
-    backgroundColor:"#00a680"
+    backgroundColor: "#00a680"
   },
   loginErrorMessage: {
     color: "#f00",
@@ -201,7 +205,7 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   divider: {
-    backgroundColor: '#00a680',
+    backgroundColor: "#00a680",
     marginBottom: 20
   },
   textRegister: {
@@ -211,8 +215,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10
   },
   btnRegister: {
-    color:"#00a680",
+    color: "#00a680",
     fontWeight: "bold"
   }
-
 });

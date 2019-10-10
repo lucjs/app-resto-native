@@ -16,10 +16,10 @@ export default class MyAccountGuest extends Component {
 
                    return (
                      <View style={styles.viewBody}>
-                       <Text>Account Guest...</Text>
-                       <Image
-                         source={require("../../../assets/img/invitado.jpg")}
-                         style = {styles.image}
+                       <Text>Account Guest...</Text>                      
+                        <Image
+                         source={require("../../../assets/img/invitado.png")}
+                         style={styles.img}
                          PlaceholderContent={<ActivityIndicator />}
                          resizeMode="contain"
                        />
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         paddingLeft: 30,
         paddingRight: 30   
     },
-    image: {
+    img: {
         height: 150,
         marginBottom: 40
     },

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { Button } from 'react-native-elements';
 import * as firebase from 'firebase';
 import MyAccountGuest from '../../components/accounts/MyAccountGuest';
+import MyAccountUser from '../../components/accounts/MyAccountUser/index';
 
 export default class MyAccount extends Component {
 
@@ -44,16 +44,9 @@ export default class MyAccount extends Component {
 
 
     render() {
-
-        const {login} = this.state;
-        
+        const {login} = this.state;        
         if (login) {
-              return (
-                <View style={styles.viewBody}>
-                    <Text>Estas loguedado correctamente...</Text>                   
-                    <Button title="Cerrar Sesion" onPress={() => this.logout()}/>
-                </View>
-            );      
+           return <MyAccountUser /> 
         } 
         else {
             return <MyAccountGuest goToScreen={this.goToScreen}/>       
