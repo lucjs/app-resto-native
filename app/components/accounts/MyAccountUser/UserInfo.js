@@ -3,6 +3,7 @@ import { StyleSheet, View, Text } from "react-native";
 import { Avatar } from "react-native-elements";
 import * as firebase from "firebase";
 import UpdateUserInfo from "./UpdateUserInfo";
+import Toast, {DURATION} from "react-native-easy-toast";
 
 export default class UserInfo extends Component {
   constructor(props) {
@@ -28,6 +29,15 @@ export default class UserInfo extends Component {
     });
   };
 
+  reauthenticate = currentPassword => {
+    const user = firebase.auth().currentUser;
+    const credentials = firebase.auth.EmailAuthProvider.credential(
+      user.email,
+      currentPassword
+    );
+    return user.reauthenticateWithCredential(credentials);
+  };
+
   checkUserAvatar = photoURL => {
     return photoURL
       ? photoURL
@@ -43,12 +53,32 @@ export default class UserInfo extends Component {
     this.getUserInfo();
   };
 
+  updateUserEmail = async (newEmail, password) => {
+    this.reauthenticate(password)
+      .then(() => {
+        const user = firebase.auth().currentUser;
+        user
+          .updateEmail(newEmail)
+          .then(() => {
+            console.log("Email cambiado correctamente");
+            firebase.auth().signOut();
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      })
+      .catch(err => {
+        console.log("Tu contraseña no es correcta");
+      });
+  };
+
   returnUpdateUserInfoComponent = userInfoData => {
     if (userInfoData.hasOwnProperty("uid")) {
       return (
         <UpdateUserInfo
           userInfo={this.state.userInfo}
           updateUserDisplayName={this.updateUserDisplayName}
+          updateUserEmail={this.updateUserEmail}
         />
       );
     }
