@@ -43,7 +43,7 @@ export default class UserInfo extends Component {
       return (
         <UpdateUserInfo
           userInfo={this.state.userInfo}
-          updateUserDisplayName={this.displayName}
+          updateUserDisplayName={this.updateUserDisplayName}
         />
       );
     }

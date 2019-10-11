@@ -17,7 +17,9 @@ export default class UpdateUserInfo extends Component {
           iconColorRight: "#ccc",
           iconNameLeft: "account-circle",
           iconColorLeft: "#ccc",
-          onPress: () => this.openOverlay("Nombre y Apellido", this.updateUserDisplayName)
+          onPress: () => this.openOverlay("Nombre y Apellido", 
+          this.updateUserDisplayName,
+          props.userInfo.displayName )
         },
         {
           title: "Cambiar Email",
@@ -41,9 +43,12 @@ export default class UpdateUserInfo extends Component {
     };
   }
 
-  openOverlay = (placeholder, updateFunction) => {
+  openOverlay = (placeholder, updateFunction, inputValue) => {
     this.setState({
-        overlayComponent:<OverlayOneInput isVisibleOverlay={true}/>
+        overlayComponent:<OverlayOneInput isVisibleOverlay={true} 
+        placeholder={placeholder}
+        updateFunction={updateFunction}
+        inputValue={inputValue} />
     });
   };
 

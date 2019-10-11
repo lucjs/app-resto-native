@@ -8,11 +8,25 @@ export default class OverlayOneInput extends Component {
         super(props);
         this.state = {
             ...props
-        }           
-        console.log(this.state);   
+        }    
     }
+    
+    onChangeInput = (inputData) => {
+        this.setState({
+            inputValue: inputData
+        });
+    }
+
+    update = () => {
+        const newValue = this.state.inputValue;
+        this.state.updateFunction(newValue);
+        this.setState({
+            isVisibleOverlay: false
+        });
+    }
+
     render(){
-        const { isVisibleOverlay } = this.state;
+        const { isVisibleOverlay, placeholder, inputValue } = this.state;
         return (
             <Overlay 
             isVisible={isVisibleOverlay} 
@@ -22,14 +36,15 @@ export default class OverlayOneInput extends Component {
                 <View 
                 style={styles.viewOverlay}>
                     <Input 
-                    placeholder="Texto....."
+                    placeholder={placeholder}
                     containerStyle={styles.inputContainer}
-                    //onChangeText={value => console.log(value)}
-                    value=""
+                    onChangeText={value => this.onChangeInput(value)}
+                    value={inputValue}
                     />
                     <Button 
                     title="Actualizar"
                     buttonStyle={styles.btnStyle}
+                    onPress = {() => this.update()}
                     />
                 </View>
             </Overlay>
