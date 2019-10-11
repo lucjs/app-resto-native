@@ -20,6 +20,7 @@ export default class OverlayOneInput extends Component {
     update = () => {
         const newValue = this.state.inputValue;
         this.state.updateFunction(newValue);
+        
         this.setState({
             isVisibleOverlay: false
         });

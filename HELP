@@ -26,3 +26,6 @@ yarn add react-native-easy-toast
 expo install expo-facebook
 expo fetch:android:hashes
 
+yarn add expo-permissions
+yarn add expo-image-picker
+

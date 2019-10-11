@@ -57,14 +57,33 @@ export default class UpdateUserInfo extends Component {
         });
   }
 
-  openOverlay = (placeholder, updateFunction, inputValue) => {
+  openOverlay = (placeholder, inputValue, updateFunction) => {
     this.setState({
-        overlayComponent:<OverlayOneInput isVisibleOverlay={true} 
+        overlayComponent: (
+        <OverlayOneInput 
+        isVisibleOverlay={true} 
         placeholder={placeholder}
         updateFunction={updateFunction}
         inputValue={inputValue} />
+        )
     });
   }
+
+  openOverlayTwoInputs = (placeholderOne, placeholderTwo, inputValueOne, updateFunction) => {
+    this.setState({
+        overlayComponent: ( 
+        <OverlayTwoInputs 
+        isVisibleOverlay={true} 
+        placeholderOne={placeholderOne}
+        placeholderTwo={placeholderTwo}       
+        inputValueOne={inputValueOne}
+        inputValueTwo=""
+        isPassword={true}
+        updateFunction={updateFunction}
+         /> )
+    });
+  }
+
 
   updateUserEmail = async (newEmail, password) => {
     const emailOld = this.props.userInfo.email;
@@ -77,20 +96,7 @@ export default class UpdateUserInfo extends Component {
     })
   }
 
-  openOverlayTwoInputs = (placeholderOne, placeholderTwo, inputValueOne, updateFunction) => {
-    this.setState({
-        overlayComponent: ( <OverlayTwoInputs 
-        isVisibleOverlay={true} 
-        placeholderOne={placeholderOne}
-        placeholderTwo={placeholderTwo}       
-        inputValueOne={inputValueOne}
-        inputValueTwo=""
-        isPassword={true}
-        updateFunction={updateFunction}
-         /> )
-    });
-  }
-
+ 
   render() {
     const { menuItems, overlayComponent } = this.state;
     return (
