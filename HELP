@@ -29,3 +29,8 @@ expo fetch:android:hashes
 yarn add expo-permissions
 yarn add expo-image-picker
 
+MAX_TIMER_DURATION_MS. Aquí están los pasos:
+Vaya a node_modules / react-native / Libraries / Core / Timer / JSTimers.js
+Busque la variable MAX_TIMER_DURATION_MS
+Cambiar 60 * 1000 -> 10000 * 1000
+
