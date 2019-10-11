@@ -5,9 +5,10 @@ import * as firebase from "firebase";
 import UpdateUserInfo from "./UpdateUserInfo";
 
 export default class UserInfo extends Component {
-  constructor(state) {
-    super(state);
+  constructor(props) {
+    super(props);
     this.state = {
+      ...props,
       userInfo: {}
       /* userInfo: {displayName: "", email: "", photoURL: ""} */
     };
@@ -33,6 +34,21 @@ export default class UserInfo extends Component {
       : "https://api.adorable.io/avatars/255/abott@adorable.png";
   };
 
+  updateUserDisplayName = newDisplayName => {
+    console.log(newDisplayName);
+  };
+
+  returnUpdateUserInfoComponent = userInfoData => {
+    if (userInfoData.hasOwnProperty("uid")) {
+      return (
+        <UpdateUserInfo
+          userInfo={this.state.userInfo}
+          updateUserDisplayName={this.displayName}
+        />
+      );
+    }
+  };
+
   render() {
     const { displayName, email, photoURL } = this.state.userInfo;
 
@@ -50,7 +66,7 @@ export default class UserInfo extends Component {
           <Text style={styles.displayName}>{displayName}</Text>
           <Text>{email}</Text>
         </View>
-        <UpdateUserInfo />
+        {this.returnUpdateUserInfoComponent(this.state.userInfo)}
       </View>
     );
   }
@@ -59,16 +75,16 @@ export default class UserInfo extends Component {
 const styles = StyleSheet.create({
   viewUserInfo: {
     alignItems: "center",
-    justifyContent:"center",
+    justifyContent: "center",
     flexDirection: "row",
     paddingTop: 30,
     paddingBottom: 30,
-    backgroundColor: "#f2f2f2" 
+    backgroundColor: "#f2f2f2"
   },
   userInfoAvatar: {
     marginRight: 20
   },
   displayName: {
-      fontWeight: "bold"
+    fontWeight: "bold"
   }
 });

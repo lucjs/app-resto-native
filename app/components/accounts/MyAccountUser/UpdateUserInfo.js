@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { ListItem } from "react-native-elements";
+import OverlayOneInput from "../../Elements/OverlayOneInput";
 
 export default class UpdateUserInfo extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      menuItems: [
+    ...props,
+    overlayComponent: null,
+    menuItems: [
         {
           title: "Cambiar Nombre y Apellido",
           iconType: "material-comunity",
@@ -14,7 +17,7 @@ export default class UpdateUserInfo extends Component {
           iconColorRight: "#ccc",
           iconNameLeft: "account-circle",
           iconColorLeft: "#ccc",
-          onPress: () => {}
+          onPress: () => this.openOverlay("Nombre y Apellido", this.updateUserDisplayName)
         },
         {
           title: "Cambiar Email",
@@ -38,8 +41,21 @@ export default class UpdateUserInfo extends Component {
     };
   }
 
+  openOverlay = (placeholder, updateFunction) => {
+    this.setState({
+        overlayComponent:<OverlayOneInput isVisibleOverlay={true}/>
+    });
+  };
+
+  updateUserDisplayName = async (newDisplayName) => {
+        this.state.updateUserDisplayName(newDisplayName);
+        this.setState({
+            overlayComponent:null
+        });
+  }
+
   render() {
-    const { menuItems } = this.state;
+    const { menuItems, overlayComponent } = this.state;
     return (
       <View>
         {menuItems.map((item, index) => (
@@ -59,7 +75,8 @@ export default class UpdateUserInfo extends Component {
             onPress={item.onPress}
             containerStyle={styles.contentContainerStyle}
           />
-        ))}
+        ))}  
+        {overlayComponent}     
       </View>
     );
   }
