@@ -10,7 +10,7 @@ export default class MyAccountUser extends Component {
 
                  render() {                  
                    return (
-                     <View>                      
+                     <View >                      
                        <UserInfo />                   
                      </View>
                    );

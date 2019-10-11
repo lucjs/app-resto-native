@@ -53,7 +53,9 @@ export default class UpdateUserInfo extends Component {
   };
 
   updateUserDisplayName = async (newDisplayName) => {
+      if (newDisplayName) {
         this.state.updateUserDisplayName(newDisplayName);
+      }       
         this.setState({
             overlayComponent:null
         });

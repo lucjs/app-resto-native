@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Text } from "react-native";
-import { Overlay, Input, Button } from 'react-native-elements';
+import { StyleSheet, View } from "react-native";
+import { Overlay, Input, Button, Icon } from 'react-native-elements';
 
 export default class OverlayOneInput extends Component {
 
@@ -25,6 +25,13 @@ export default class OverlayOneInput extends Component {
         });
     }
 
+    close = () => {     
+        this.setState({
+            isVisibleOverlay: false
+        });
+        this.state.updateFunction(null);
+    }
+
     render(){
         const { isVisibleOverlay, placeholder, inputValue } = this.state;
         return (
@@ -45,6 +52,14 @@ export default class OverlayOneInput extends Component {
                     title="Actualizar"
                     buttonStyle={styles.btnStyle}
                     onPress = {() => this.update()}
+                    />
+                    <Icon 
+                    type="material-community"
+                    name="close-circle-outline"
+                    containerStyle={styles.containerIconClose}
+                    size={30} 
+                    color="red"
+                    onPress = {() => this.close()}                  
                     />
                 </View>
             </Overlay>
@@ -73,5 +88,10 @@ const styles = StyleSheet.create({
     },
     btnStyle: {
         backgroundColor: "#00a680"
+    },
+    containerIconClose:{
+        position:"absolute",
+        right: -15,
+        top: -16
     }
 });

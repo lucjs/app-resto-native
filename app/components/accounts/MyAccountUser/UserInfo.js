@@ -34,8 +34,13 @@ export default class UserInfo extends Component {
       : "https://api.adorable.io/avatars/255/abott@adorable.png";
   };
 
-  updateUserDisplayName = newDisplayName => {
-    console.log(newDisplayName);
+  updateUserDisplayName = async newDisplayName => {
+    const update = {
+      displayName: newDisplayName
+      //photoURL: 'https://my-cdn.com/assets/user/123.png',
+    };
+    await firebase.auth().currentUser.updateProfile(update);
+    this.getUserInfo();
   };
 
   returnUpdateUserInfoComponent = userInfoData => {
@@ -63,8 +68,10 @@ export default class UserInfo extends Component {
             source={{ uri: this.checkUserAvatar(photoURL) }}
             containerStyle={styles.userInfoAvatar}
           />
-          <Text style={styles.displayName}>{displayName}</Text>
-          <Text>{email}</Text>
+          <View>
+            <Text style={styles.displayName}>{displayName}</Text>
+            <Text>{email}</Text>
+          </View>
         </View>
         {this.returnUpdateUserInfoComponent(this.state.userInfo)}
       </View>
