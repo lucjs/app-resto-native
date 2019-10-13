@@ -56,6 +56,15 @@ export default class UserInfo extends Component {
     this.getUserInfo();
   };
 
+  updateUserPhotoUrl = async photoUri=> {
+    const update = {
+      photoURL: photoUri
+      //photoURL: 'https://my-cdn.com/assets/user/123.png',
+    };
+    await firebase.auth().currentUser.updateProfile(update);
+    this.getUserInfo();
+  };
+
   updateUserEmail = async (newEmail, password) => {
     this.reauthenticate(password)
       .then(() => {
@@ -81,6 +90,11 @@ export default class UserInfo extends Component {
       });
   };
 
+  updateUserPassword = async (currentPassword, newPassword) => {
+      console.log(currentPassword);
+      console.log(newPassword);
+  }
+
   returnUpdateUserInfoComponent = userInfoData => {
     if (userInfoData.hasOwnProperty("uid")) {
       return (
@@ -88,10 +102,11 @@ export default class UserInfo extends Component {
           userInfo={this.state.userInfo}
           updateUserDisplayName={this.updateUserDisplayName}
           updateUserEmail={this.updateUserEmail}
+          updateUserPassword={this.updateUserPassword}
         />
       );
     }
-  };
+  }; 
 
   changeAvatarUserPhoto = async () => {
     const resultPermissions = await Permissions.askAsync(
@@ -114,8 +129,25 @@ export default class UserInfo extends Component {
       } else {
         //console.log("Has seleccionado una imagen");
         const { uid } = this.state.userInfo;
-        this.uploadImage(result.uri, uid);
-        console.log(result.uri, uid);
+        this.uploadImage(result.uri, uid)
+        .then(resolve => {
+            this.refs.toast.show("Avatar actualizado correctamente");
+            firebase
+            .storage()
+            .ref("avatar/" + uid)
+            .getDownloadURL()
+            .then(resolve=> {
+              console.log(resolve);
+              this.updateUserPhotoUrl();
+            })
+            .catch(error => {
+              this.refs.toast.show("Error al intentar recuperar avatar del servidor");
+            });
+
+        }).catch(error => {
+          this.refs.toast.show("No se pudo actualizar, intentelo nuevamente");
+        });
+        //console.log(result.uri, uid);
       }
     }
   };
@@ -124,17 +156,16 @@ export default class UserInfo extends Component {
     //console.log("uri: ", uri);
     //console.log("nameImage: ", nameImage);
     return new Promise((resolve, reject) => {
-      let xhr = new XMLHttpRequest();
-      xhr.onerror = reject;
-      xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4) {
-          resolve(xhr.response);
+      let req = new XMLHttpRequest();
+      req.onerror = reject;
+      req.onreadystatechange = () => {
+        if (req.readyState === 4) {
+          resolve(req.response);
         }
       };
-
-      xhr.open("GET", uri);
-      xhr.responseType = "blob";
-      xhr.send();
+      req.open("GET", uri);
+      req.responseType = "blob";
+      req.send();
     })
       .then(async resolve => {
         let ref = firebase
